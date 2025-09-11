@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { User } from '../config/models/user.model.js';
 import bcrypt from 'bcrypt';
-import { requiereLogin, alreadyLogin } from '../middleware/auth.middlewar.js';
+import { alreadyLoggedIn, requireLogin } from '../middleware/auth.middlewar.js';
 
 const router = new Router();
 
-router.post('/register', alreadyLogin, async (req, res) => {
+router.post('/register', alreadyLoggedIn, async (req, res) => {
     try {
         const { first_name, last_name, email, age, password } = req.body;
         if (!first_name || !last_name || !email || !password) {
@@ -25,7 +25,7 @@ router.post('/register', alreadyLogin, async (req, res) => {
     }
 })
 
-router.post('/login', alreadyLogin, async (req, res) => {
+router.post('/login', alreadyLoggedIn, async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
@@ -48,13 +48,13 @@ router.post('/login', alreadyLogin, async (req, res) => {
     }
 })
 
-router.post('/logout', requiereLogin, async (req, res) => {
+router.post('/logout', requireLogin, async (req, res) => {
     req.session.destroy(() => {
         res.status(200).json({ message: "Logout exitoso" });
     })
 })
 
-router.get('/', requiereLogin, async (req, res) => {
+router.get('/', requireLogin, async (req, res) => {
     try {
         const users = await User.find();
         res.status(200).json({ users: users });
