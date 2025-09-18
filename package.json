@@ -1,7 +1,7 @@
 {
   "name": "be_2_76865",
   "version": "1.0.0",
-  "description": "",
+  "description": "Mi primer app en Node con express",
   "main": "app.js",
   "type": "module",
   "scripts": {
@@ -9,8 +9,16 @@
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Drako01/be_2_76865.git"
+  },
   "author": "Alejandro Di Stefano",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Drako01/be_2_76865.git/issues"
+  },
+  "homepage": "https://github.com/Drako01/be_2_76865.git#readme",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "connect-mongo": "^5.1.0",
@@ -21,8 +29,7 @@
     "mongoose": "^8.18.0",    
     "jsonwebtoken": "^9.0.2",
     "passport": "^0.7.0",
-    "passport-github2": "^0.1.12",
-    "passport-local": "^1.0.0"
+    "passport-jwt": "^4.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
