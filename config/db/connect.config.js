@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-import dotenv from 'dotenv';
-dotenv.config();
+import environment from '../env.config.js';
 
 const baseMongooseOpts = {
     serverSelectionTimeoutMS: 10000,
@@ -8,7 +7,7 @@ const baseMongooseOpts = {
 
 export const connectToMongoDB = async () => {
     try {
-        const uri = process.env.MONGO_URI;
+        const uri = environment.MONGO_URI;
         if (!uri) throw new Error("Falta MONGO_URI en el .env");
         await mongoose.connect(uri, baseMongooseOpts);
         console.log('✅ MongoDB conectado exitosamente.!!');
@@ -20,7 +19,7 @@ export const connectToMongoDB = async () => {
 
 export const connectMongoDBAltas = async () => {
     try {
-        const uri = process.env.MONGO_URI_ATLAS;
+        const uri = environment.MONGO_URI_ATLAS;
         if (!uri) throw new Error("Falta MONGO_URI_ATLAS en el .env");
         await mongoose.connect(uri, baseMongooseOpts)
         console.log('✅ MongoAltas conectado exitosamente.!!')
@@ -31,7 +30,7 @@ export const connectMongoDBAltas = async () => {
 };
 
 export const connectAuto = async () => {
-    const target = (process.env.MONGO_TARGET || "LOCAL").toUpperCase();
+    const target = (environment.MONGO_TARGET || "LOCAL").toUpperCase();
     if(target === "ATLAS") return connectMongoDBAltas();
     return connectToMongoDB();
 }

@@ -3,7 +3,7 @@ import { User } from '../config/models/user.model.js';
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 import { requireJwtCookie } from "../middleware/auth.middlewar.js";
-
+import environment from '../config/env.config.js';
 
 const router = Router();
 
@@ -32,7 +32,7 @@ router.post("/jwt/login", async (req, res) => {
     if (!ok) return res.status(400).json({ error: "Password inválido" });
 
     const payload = { sub: String(u._id), email: u.email, role: u.role };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign(payload, environment.JWT_SECRET, { expiresIn: "1h" });
 
     // Cookie HttpOnly
     res.cookie('access_token', token, {
