@@ -1,7 +1,7 @@
 import passport from "passport";
 import { Strategy as JwtStrategy } from "passport-jwt";
 import environment from '../env.config.js';
-import { User } from "../models/user.model.js";
+import { User } from "../../models/user.model.js";
 
 // Funcion que sirve para leer el token desde la cookie httponly 'acces_token'
 function cookieExtractor(req) {

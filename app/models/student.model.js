@@ -13,7 +13,7 @@ const studentShema = new mongoose.Schema({
     },
     age: {
         type: Number,
-        require: true
+        require: false
     },
 
 });

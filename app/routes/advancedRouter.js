@@ -1,7 +1,7 @@
 import CustomRouter from "./_customRouter.js";
-import { requireJwtCookie } from '../middleware/auth.middlewar.js';
+import { requireJwtCookie } from '../middleware/auth.middleware.js';
 import { policies } from '../middleware/policies.middleware.js';
-import { Student } from '../config/models/student.model.js';
+import { Student } from '../models/student.model.js';
 
 const router = new CustomRouter({mergeParams: true});
 

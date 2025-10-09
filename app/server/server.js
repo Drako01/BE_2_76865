@@ -3,6 +3,8 @@ import express from 'express';
 import authRouter from '../routes/auth.router.js';
 import homeRouter from '../routes/home.router.js'
 import studentRouter from '../routes/student.router.js'
+import newStudentRouter from '../routes/new_student.router.js';
+
 import apiV1Router from '../routes/api.v1.router.js';
 import advancedRouter from '../routes/advancedRouter.js';
 import processRouter from '../routes/process.router.js';
@@ -62,7 +64,7 @@ export const startServer = async () => {
     app.use('/auth', authRouter);
     app.use('/', homeRouter);
     app.use('/student', studentRouter);
-
+    app.use('/new-student', newStudentRouter);
 
     // Agrupar Router versionados
     app.use('/api/v1', apiV1Router);

@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { User } from '../config/models/user.model.js';
+import { User } from '../models/user.model.js';
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
-import { requireJwtCookie } from "../middleware/auth.middlewar.js";
+import { requireJwtCookie } from "../middleware/auth.middleware.js";
 import environment from '../config/env.config.js';
 
 const router = Router();
