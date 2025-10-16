@@ -4,6 +4,7 @@ import authRouter from '../routes/auth.router.js';
 import homeRouter from '../routes/home.router.js'
 import studentRouter from '../routes/student.router.js'
 import newStudentRouter from '../routes/new_student.router.js';
+import orderRouter from '../routes/order.router.js';
 
 import apiV1Router from '../routes/api.v1.router.js';
 import advancedRouter from '../routes/advancedRouter.js';
@@ -21,6 +22,12 @@ import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import { initPassport } from '../config/auth/passport.config.js'
 
+import { engine } from 'express-handlebars';
+import path from 'path';
+import { fileURLToPath  } from 'url';
+import { hbsHelpers } from './hbs.helper.js';
+
+
 const app = express();
 
 const PORT = environment.PORT || 5000;
@@ -29,6 +36,8 @@ app.use(express.json());
 app.use(logger);
 app.use(cookieParser('clave_secreta'));
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const startServer = async () => {
 
@@ -60,11 +69,24 @@ export const startServer = async () => {
     initPassport();
     app.use(passport.initialize());
 
+    // Rutas de Handlebars
+    app.engine('handlebars', engine({
+        defaultLayout: 'main',
+        layoutDir: path.join(__dirname, '../views/layouts'),
+        helpers: hbsHelpers,
+    }))
+    app.set('view engine', 'handlebars');
+    app.set('views', path.join(__dirname, '../views'));
+
     // Llamadas al enrutador
     app.use('/auth', authRouter);
     app.use('/', homeRouter);
     app.use('/student', studentRouter);
     app.use('/new-student', newStudentRouter);
+
+
+    // Enrutador de Ordenes
+    app.use('/', orderRouter);
 
     // Agrupar Router versionados
     app.use('/api/v1', apiV1Router);
