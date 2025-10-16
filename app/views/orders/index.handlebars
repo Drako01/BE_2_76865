@@ -1,0 +1,58 @@
+<section class="toolbar">
+  <form method="GET" action="/orders">
+    <label for="status">Estado:</label>
+    <select id="status" name="status">
+      <option value="" {{#unless currentStatus}}selected{{/unless}}>Todos</option>
+      <option value="pending" {{#if (eq currentStatus "pending")}}selected{{/if}}>Pendiente</option>
+      <option value="paid" {{#if (eq currentStatus "paid")}}selected{{/if}}>Pagado</option>
+      <option value="delivered" {{#if (eq currentStatus "delivered")}}selected{{/if}}>Entregado</option>
+      <option value="cancelled" {{#if (eq currentStatus "cancelled")}}selected{{/if}}>Cancelado</option>
+    </select>
+    <button type="submit">Filtrar</button>
+  </form>
+</section>
+
+<table>
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Comprador</th>
+      <th>Email</th>
+      <th>Ítems</th>
+      <th>Total</th>
+      <th>Estado</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each orders}}
+      <tr>
+        <td>{{code}}</td>
+        <td>{{buyerName}}</td>
+        <td>{{buyerEmail}}</td>
+        <td>
+          {{#each items}}
+            <span class="pill badge">{{qty}}× {{title}}</span>
+          {{/each}}
+        </td>
+        <td>${{formatMoney total}}</td>
+        <td><span class="badge">{{status}}</span></td>
+        <td>{{formatDate createdAt}}</td>
+      </tr>
+    {{else}}
+      <tr><td colspan="7">Sin órdenes.</td></tr>
+    {{/each}}
+  </tbody>
+</table>
+
+{{#if pagination}}
+  <div class="pagination" style="margin-top:12px;">
+    {{#each (range 1 pagination.pages)}}
+      {{#if (eq this ../pagination.page)}}
+        <span class="current">{{this}}</span>
+      {{else}}
+        <a href="/orders?page={{this}}{{#if ../currentStatus}}&status={{../currentStatus}}{{/if}}">{{this}}</a>
+      {{/if}}
+    {{/each}}
+  </div>
+{{/if}}

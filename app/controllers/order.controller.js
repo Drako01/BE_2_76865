@@ -8,7 +8,7 @@ class OrderController {
             const limit = Number(req.query.limit || 10);
             const status = req.query.status;
             const data = await svc.list({ page, limit, status });
-            res.status(200).render("order/index", {
+            res.status(200).render("orders/index", {
                 title: "Ordenes",
                 orders: data.items,
                 pagination: { page: data.page, pages: data.pages, total: data.total, limit: data.limit },

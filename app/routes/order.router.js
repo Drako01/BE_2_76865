@@ -5,7 +5,7 @@ import { orderController as ctrl } from '../controllers/order.controller.js';
 
 const router = Router();
 
-router.use(requireJwtCookie);
+// router.use(requireJwtCookie);
 
 // Vistas
 router.get('/orders', (req, res) => ctrl.listView(req, res));

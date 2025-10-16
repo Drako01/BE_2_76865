@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{#if title}}{{title}} — {{/if}}Backend 2 — Unidad 7</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 24px; }
+    header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border-bottom: 1px solid #9993; padding: 8px 10px; text-align: left; }
+    th { font-weight: 600; }
+    .badge { padding: 2px 8px; border-radius: 999px; font-size: 12px; border: 1px solid #9996; }
+    .pill { display: inline-block; margin-right: 6px; }
+    nav a { margin-right: 10px; }
+    .pagination a { margin: 0 4px; text-decoration: none; }
+    .pagination .current { font-weight: bold; }
+    .toolbar { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
+    input, select, button { padding: 6px 10px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>{{title}}</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/orders">Órdenes</a>
+    </nav>
+  </header>
+  {{{body}}}
+</body>
+</html>
