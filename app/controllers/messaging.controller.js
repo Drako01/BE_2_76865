@@ -1,4 +1,4 @@
-import { messagingService as svc } from "../services/messaging.service";
+import { messagingService as svc } from "../services/messaging.service.js";
 
 class MessagingController {
     async sendSMS(req, res) {
