@@ -5,6 +5,7 @@ import homeRouter from '../routes/home.router.js'
 import studentRouter from '../routes/student.router.js'
 import newStudentRouter from '../routes/new_student.router.js';
 import orderRouter from '../routes/order.router.js';
+import messagingRouter from '../routes/messaging.router.js';
 
 import apiV1Router from '../routes/api.v1.router.js';
 import advancedRouter from '../routes/advancedRouter.js';
@@ -87,6 +88,7 @@ export const startServer = async () => {
 
     // Enrutador de Ordenes
     app.use('/', orderRouter);
+    app.use('/', messagingRouter);
 
     // Agrupar Router versionados
     app.use('/api/v1', apiV1Router);
